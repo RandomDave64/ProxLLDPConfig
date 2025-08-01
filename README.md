@@ -20,7 +20,7 @@ To use the automated install script, follow these steps:
    To get started, clone the repository from GitHub by running the following command:
 
    ```bash
-   git clone https://github.com/abdellbar1/ProxLLDPConfig.git
+   git clone https://github.com/RandomDave64/ProxLLDPConfig.git
    cd ProxLLDPConfig
    ```
 2. **Make the script executable**:
@@ -31,7 +31,7 @@ To use the automated install script, follow these steps:
 3. **Run the script as root**:
 
     ```bash
-    sudo ./install.sh
+    ./install.sh
     ```
 This script handles all the configurations and setups automatically, enhancing your Proxmox server's network management capabilities with minimal manual intervention.
 
@@ -42,13 +42,13 @@ LLDP is not installed by default on Proxmox. You will need to install the `lldpd
 1. Update your package list:
 
     ```bash
-    sudo apt update
+    apt update
     ```
 
 2. Install `lldpd`:
 
     ```bash
-    sudo apt install lldpd
+    apt install lldpd
     ```
 
 ## Configuration of LLDPD
@@ -60,7 +60,7 @@ After installation, configure `lldpd` to enable additional discovery protocols a
 1. Open the `lldpd` default configuration file:
 
     ```bash
-    sudo nano /etc/default/lldpd
+    nano /etc/default/lldpd
     ```
 
 2. Add or modify the following line to enable CDP and other protocols:
@@ -81,7 +81,7 @@ After installation, configure `lldpd` to enable additional discovery protocols a
 Restart the `lldpd` service to apply the changes:
 
 ```bash
-sudo systemctl restart lldpd
+systemctl restart lldpd
 ```
 ## Configuring Interface Pattern
 
@@ -92,13 +92,13 @@ Configure `lldpd` to monitor only interfaces that match a specific pattern, such
 1. Use `lldpcli` to configure the system to monitor interfaces that match the `en*` pattern. This command tells `lldpd` to apply its configuration only to interfaces whose names start with `en`.
 
     ```bash
-    sudo lldpcli configure system interface pattern en*
+    lldpcli configure system interface pattern en*
     ```
 
 2. To verify that the interface pattern has been set correctly, you can display the current configuration of `lldpd`:
 
     ```bash
-    sudo lldpcli show configuration
+    lldpcli show configuration
     ```
 
 This setup ensures that `lldpd` will focus on Ethernet interfaces (like `eno0`, `ens2f1`, etc.), which are typically used in server environments, and will ignore other types of interfaces that do not match the specified pattern.
@@ -113,7 +113,7 @@ Create a cron script that updates the network interface descriptions based on LL
    Open a terminal and use the following command to create a new script file:
 
     ```bash
-    sudo nano /usr/local/bin/update_interface_desc.sh
+    nano /usr/local/bin/update_interface_desc.sh
     ```
 
 2. **Paste the code from the `update_interface_desc.sh` file**, adjusting paths and commands as necessary. Here is a basic example of what the script might include:
@@ -124,7 +124,7 @@ Create a cron script that updates the network interface descriptions based on LL
    Grant execute permissions to the script using the following command:
 
     ```bash
-    sudo chmod +x /usr/local/bin/update_interface_desc.sh
+    chmod +x /usr/local/bin/update_interface_desc.sh
     ```
 
 ### Updating the Cron Job
@@ -133,7 +133,7 @@ Create a cron script that updates the network interface descriptions based on LL
    Access the cron job editor for the root user by executing:
 
     ```bash
-    sudo crontab -e
+    crontab -e
     ```
 
 2. **Add the following line to run the script every hour**:
