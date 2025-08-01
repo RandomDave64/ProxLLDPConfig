@@ -28,24 +28,24 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 echo "Updating package lists..."
-sudo apt update
+apt update
 
 echo "Installing lldpd..."
-sudo apt install lldpd -y
+apt install lldpd -y
 
 echo "Configuring lldpd to enable additional protocols..."
-echo 'DAEMON_ARGS="-x -c -s -e"' | sudo tee /etc/default/lldpd
+echo 'DAEMON_ARGS="-x -c -s -e"' | tee /etc/default/lldpd
 
 echo "Restarting lldpd service..."
-sudo systemctl restart lldpd
+systemctl restart lldpd
 
 echo "Configuring lldpd to monitor all interfaces matching '*' pattern..."
-sudo lldpcli configure system interface pattern *
+lldpcli configure system interface pattern *
 
 # Assuming the update_interface_desc.sh is in the same directory as install.sh
 # Copy the update_interface_desc.sh script to /usr/local/bin
 echo "Copying the update_interface_desc.sh script to /usr/local/bin..."
-sudo cp update_interface_desc.sh /usr/local/bin/update_interface_desc.sh
+cp update_interface_desc.sh /usr/local/bin/update_interface_desc.sh
 sudo chmod +x /usr/local/bin/update_interface_desc.sh
 
 echo "Creating cron job for updating interface descriptions..."
