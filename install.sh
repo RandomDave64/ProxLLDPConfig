@@ -46,7 +46,7 @@ lldpcli configure system interface pattern en*
 # Copy the update_interface_desc.sh script to /usr/local/bin
 echo "Copying the update_interface_desc.sh script to /usr/local/bin..."
 cp update_interface_desc.sh /usr/local/bin/update_interface_desc.sh
-sudo chmod +x /usr/local/bin/update_interface_desc.sh
+chmod +x /usr/local/bin/update_interface_desc.sh
 
 echo "Creating cron job for updating interface descriptions..."
 (crontab -l 2>/dev/null; echo "0 * * * * /usr/local/bin/update_interface_desc.sh >> /var/log/update_interface_desc.log 2>&1") | crontab -
